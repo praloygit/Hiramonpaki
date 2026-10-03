@@ -53,7 +53,7 @@ print(f"{YELLOW}Running nmap scan... please wait{RESET}")
 
 result = subprocess.run(command, capture_output=True, text=True)
 
-print("PORT    STATE SERVICE        VERSION")
+print("| PORT | STATE | SERVICE | VERSION |")
 
 for port in ("21", "80", "443"):
     match = re.search(rf"^{port}/tcp\s+.*$", result.stdout, re.MULTILINE)
@@ -64,7 +64,7 @@ for port in ("21", "80", "443"):
 
 print(f"{GREEN}nmap finished.{RESET}")       
 
-print(f"{GREEN}Full nmap scan saved in Fullscan.txt{RESET}")
+print(f"{GREEN}Full nmap scan saved in {RED}{"Fullscan.txt"}{RESET}{RESET}")
 
 
 
@@ -72,16 +72,12 @@ print(f"______________________{CYAN}SUBFINDER TOOL{RESET}______________________"
 
 # Subfinder enumerate Command:
 
-command2 = ["subfinder","-d", target,"-o","subdomain.txt"]
+command2 = ["subfinder","-d", target, "-silent", "-o","subdomain.txt"]
 
 print(f"{YELLOW}Running subfinder scan... please wait{RESET}")
 
 print(subprocess.run(command2,capture_output=True, text=True).stdout)
 
-with open("subdomain.txt") as f:
-    print(f.read())
-
 print(f"{GREEN}subfinder finished.{RESET}")
 
-print(f"{GREEN}Subdomain scan saved in subdomains.txt{RESET}")
-
+print(f"{GREEN}Subdomain scan saved in {RED}subdomains.txt{RESET}{RESET}")
